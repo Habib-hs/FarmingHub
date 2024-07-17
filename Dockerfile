@@ -1,6 +1,6 @@
 FROM openjdk:22
 
-EXPOSE 8080
+EXPOSE 9090
 
 ADD target/farming-hub.jar farming-hub.jar
 
