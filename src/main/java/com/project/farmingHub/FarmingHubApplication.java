@@ -16,6 +16,7 @@ public class FarmingHubApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FarmingHubApplication.class, args);
+		System.out.println("hello ! lets build an amaging project!");
 	}
 
 }
