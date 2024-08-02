@@ -9,5 +9,6 @@ import jakarta.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer {
+
     String Name;
 }
