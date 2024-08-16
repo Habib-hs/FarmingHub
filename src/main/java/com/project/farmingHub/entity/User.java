@@ -1,6 +1,7 @@
-package com.project.farmingHub.Entity;
+package com.project.farmingHub.entity;
 import lombok.*;
-import jakarta.persistence.*;import java.util.HashSet;
+import jakarta.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity

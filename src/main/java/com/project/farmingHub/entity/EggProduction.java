@@ -1,4 +1,4 @@
-package com.project.farmingHub.Entity;
+package com.project.farmingHub.entity;
 
 import lombok.*;
 import jakarta.persistence.*;import java.time.LocalDate;
