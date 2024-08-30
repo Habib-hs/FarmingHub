@@ -1,0 +1,131 @@
+Breed:
+
+One-to-Many with Flock
+Many-to-Many with HealthProduct (recommended products)
+
+
+Flock:
+
+Many-to-One with Breed
+One-to-Many with EggProduction, Mortality, HealthEvent, FeedConsumption
+Many-to-Many with User (managers)
+Many-to-Many with HealthProduct
+
+
+EggProduction:
+
+Many-to-One with Flock
+
+
+CauseOfDeath:
+
+One-to-Many with Mortality
+
+
+Mortality:
+
+Many-to-One with Flock
+Many-to-One with CauseOfDeath
+
+
+HealthEventType:
+
+One-to-Many with HealthEvent
+
+
+HealthProduct:
+
+Many-to-Many with Flock
+Many-to-Many with Breed (recommended for breeds)
+
+
+HealthEvent:
+
+Many-to-One with Flock
+Many-to-One with HealthEventType
+Many-to-One with HealthProduct
+
+
+Supplier:
+
+One-to-Many with FeedInventory
+Many-to-Many with FeedType (supplied feed types)
+
+
+FeedType:
+
+One-to-Many with FeedInventory
+Many-to-Many with Supplier
+Many-to-Many with Customer (preferred feed types)
+
+
+FeedInventory:
+
+Many-to-One with FeedType
+Many-to-One with Supplier
+One-to-Many with FeedConsumption
+
+
+FeedConsumption:
+
+Many-to-One with Flock
+Many-to-One with FeedInventory
+
+
+Customer:
+
+One-to-Many with Sale
+Many-to-Many with FeedType (preferred feed types)
+One-to-One with CustomerProfile
+
+
+CustomerProfile:
+
+One-to-One with Customer
+
+
+Sale:
+
+Many-to-One with Customer
+Many-to-One with Flock (optional)
+
+
+ExpenseType:
+
+One-to-Many with Expense
+
+
+Expense:
+
+Many-to-One with ExpenseType
+Many-to-One with Flock (optional)
+
+
+Role:
+
+One-to-Many with User
+Many-to-Many with Permission
+
+
+Permission:
+
+Many-to-Many with Role
+
+
+User:
+
+Many-to-One with Role
+One-to-Many with Notification
+Many-to-Many with Flock (managed flocks)
+One-to-One with UserPreferences
+
+
+UserPreferences:
+
+One-to-One with User
+
+
+Notification:
+
+Many-to-One with Flock
+Many-to-One with User
