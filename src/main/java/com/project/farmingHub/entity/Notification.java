@@ -1,4 +1,5 @@
 package com.project.farmingHub.entity;
+import com.project.farmingHub.enums.NotificationType;
 import lombok.*;
 import jakarta.persistence.*;import java.time.LocalDateTime;
 
@@ -34,7 +35,4 @@ public class Notification {
     @Column(nullable = false)
     private boolean isRead = false;
 
-    public enum NotificationType {
-        EMAIL, SMS, SYSTEM
-    }
 }

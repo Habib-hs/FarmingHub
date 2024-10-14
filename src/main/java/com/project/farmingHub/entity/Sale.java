@@ -1,4 +1,5 @@
 package com.project.farmingHub.entity;
+import com.project.farmingHub.enums.SaleType;
 import lombok.*;
 import jakarta.persistence.*;import java.time.LocalDate;
 import java.math.BigDecimal;
@@ -38,7 +39,4 @@ public class Sale {
     @JoinColumn(name = "flock_id")
     private Flock flock;
 
-    public enum SaleType {
-        EGG, CHICKEN
-    }
 }
