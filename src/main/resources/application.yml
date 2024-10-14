@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/farmingHubDB
     username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:admin}
+    password: ${POSTGRES_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
