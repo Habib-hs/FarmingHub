@@ -14,7 +14,12 @@ import java.util.Set;
 @Builder
 public class HealthProduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "product_id_seq",
+            sequenceName = "product_id_seq",
+            allocationSize = 1, initialValue =30
+    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY , generator = "product_id_seq")
     @Column(name = "product_id")
     private Long productId;
 
