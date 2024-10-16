@@ -12,9 +12,6 @@ public interface HealthProductRepository extends JpaRepository<HealthProduct , L
 
     boolean existsByProductName(String productName);
 
-
-
-
     @Query("SELECT hp FROM HealthProduct hp WHERE LOWER(hp.productName) " +
             "LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(hp.productType) LIKE LOWER(CONCAT('%', :keyword, '%'))" +

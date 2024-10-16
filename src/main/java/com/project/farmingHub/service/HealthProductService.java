@@ -15,4 +15,5 @@ public interface HealthProductService {
 
     Page<HealthProductDto> getAllProducts(int pageNo , int pageSize , String searchKeyword);
 
+    HealthProductDto updateProduct(HealthProductDto dto , Long id);
 }

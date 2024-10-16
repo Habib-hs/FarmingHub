@@ -4,6 +4,7 @@ import com.project.farmingHub.entity.HealthProduct;
 import com.project.farmingHub.exception.HealthProductServiceException;
 import com.project.farmingHub.model.HealthProductDto;
 import com.project.farmingHub.service.HealthProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -42,4 +43,17 @@ public class HealthProductController {
                                             @RequestParam(required = false)String searchKeyword) {
         return ResponseEntity.ok(healthProductService.getAllProducts(pageNo , pageSize , searchKeyword));
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateProduct(@Valid @RequestBody HealthProductDto healthProductDto,
+                                        @RequestParam Long id){
+         if(healthProductService.updateProduct(healthProductDto , id) != null){
+              return ResponseEntity.ok("Product updated successfully");
+         }else{
+             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product updated failed");
+         }
+    }
+
+
+
 }

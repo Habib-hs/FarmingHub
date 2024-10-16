@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
 @Service
 public class HealthProductServiceImpl implements HealthProductService {
 
@@ -77,6 +75,32 @@ public class HealthProductServiceImpl implements HealthProductService {
                     new HealthProductDto(it.getProductId() , it.getProductName() , it.getProductType())
             );
         }
+    }
+
+    @Override
+    public HealthProductDto updateProduct(HealthProductDto dto, Long id) {
+        return healthProductRepository.findById(id)
+                .map(existingProduct->{
+
+                    if(healthProductRepository.existsByProductName(dto.getProductName())){
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST , "Product with this name already exist");
+                    }
+                    if(dto.getProductName() != null  && !dto.getProductName().trim().isEmpty()){
+                         existingProduct.setProductName(dto.getProductName());
+                    }
+
+                    if(dto.getProductType() != null && !dto.getProductType().trim().isEmpty()){
+                        existingProduct.setProductName(dto.getProductName());
+                    }
+
+                    HealthProduct updatedProduct = healthProductRepository.save(existingProduct);
+
+                    return HealthProductDto.builder().id(updatedProduct.getProductId())
+                            .productName(updatedProduct.getProductName())
+                            .productType(updatedProduct.getProductType())
+                            .build();
+                })
+                .orElseThrow(()->new ResponseStatusException(HttpStatus.BAD_REQUEST , "Product with " + id + " id not found"));
     }
 
 
