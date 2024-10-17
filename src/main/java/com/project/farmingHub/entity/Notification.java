@@ -1,4 +1,5 @@
 package com.project.farmingHub.entity;
+import com.project.annotations.entities.User;
 import com.project.farmingHub.enums.NotificationType;
 import lombok.*;
 import jakarta.persistence.*;import java.time.LocalDateTime;

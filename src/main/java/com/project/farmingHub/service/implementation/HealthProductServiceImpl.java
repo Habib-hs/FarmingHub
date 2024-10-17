@@ -22,7 +22,7 @@ public class HealthProductServiceImpl implements HealthProductService {
     }
 
     @Override
-    public HealthProduct addProducts(HealthProduct healthProduct) throws HealthProductServiceException {
+    public HealthProduct addProducts(HealthProduct healthProduct) {
 
         if(healthProductRepository.existsByProductName(healthProduct.getProductName())){
             //throw new HealthProductServiceException("Product name already exists");

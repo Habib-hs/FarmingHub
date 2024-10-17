@@ -7,8 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface HealthProductRepository extends JpaRepository<HealthProduct , Long> {
-    HealthProduct findByProductName(String productName);
+    Optional<HealthProduct> findByProductName(String productName);
 
     boolean existsByProductName(String productName);
 

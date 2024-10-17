@@ -1,9 +1,10 @@
 package com.project.farmingHub.service;
 
+
 import com.project.farmingHub.entity.Breed;
-import org.springframework.http.ResponseEntity;
+import com.project.farmingHub.model.BreedDto;
 
 public interface BreedService {
 
-    ResponseEntity<Breed> addBreeds(Breed breed);
+    Breed addBreeds(BreedDto breed);
 }

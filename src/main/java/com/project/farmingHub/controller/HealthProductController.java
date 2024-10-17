@@ -22,7 +22,7 @@ public class HealthProductController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<String> addProduct(@RequestBody @Validated HealthProduct healthProduct) throws HealthProductServiceException {
+    public ResponseEntity<String> addProduct(@RequestBody @Validated HealthProduct healthProduct) {
         if(healthProductService.addProducts(healthProduct) != null){
             return ResponseEntity.ok("Product inserted successfully");
         }else{

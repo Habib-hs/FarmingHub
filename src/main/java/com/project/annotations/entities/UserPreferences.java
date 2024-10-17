@@ -1,4 +1,4 @@
-package com.project.farmingHub.entity;
+package com.project.annotations.entities;
 import lombok.*;
 import jakarta.persistence.*;
 @Entity
