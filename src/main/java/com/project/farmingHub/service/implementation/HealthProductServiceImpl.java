@@ -5,6 +5,9 @@ import com.project.farmingHub.exception.HealthProductServiceException;
 import com.project.farmingHub.model.HealthProductDto;
 import com.project.farmingHub.repo.HealthProductRepository;
 import com.project.farmingHub.service.HealthProductService;
+import jakarta.transaction.Transactional;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +42,7 @@ public class HealthProductServiceImpl implements HealthProductService {
         return healthProductRepository.save(product);
     }
 
+    @Cacheable(value = "HealthProductDto" , key = "#id")
     @Override
     public HealthProductDto getProductById(Long id) {
         return healthProductRepository.findById(id)
@@ -50,6 +54,7 @@ public class HealthProductServiceImpl implements HealthProductService {
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.BAD_REQUEST , "Product with " + id + " id not found"));
     }
 
+    @Cacheable(value = "HealthProductDto")
     @Override
     public Page<HealthProductDto> getAllProducts(int pageNo, int pageSize, String searchKeyword) {
         Pageable pageable = PageRequest.of(pageNo , pageSize);
@@ -77,6 +82,8 @@ public class HealthProductServiceImpl implements HealthProductService {
         }
     }
 
+    @Transactional
+    @CachePut(value = "HealthProductDto" , key = "#id")
     @Override
     public HealthProductDto updateProduct(HealthProductDto dto, Long id) {
         return healthProductRepository.findById(id)

@@ -1,4 +1,4 @@
-package com.project.farmingHub.model;
+package com.project.farmingHub.model.Breed;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

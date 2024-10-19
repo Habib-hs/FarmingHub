@@ -3,7 +3,10 @@ import com.project.farmingHub.validation.ValidatorProductType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import jakarta.persistence.*;import java.util.HashSet;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,7 +15,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class HealthProduct {
+public class HealthProduct implements Serializable {
+
+    private static final long serialVersionUID = -4439114469417994311L;
+
     @Id
     @SequenceGenerator(
             name = "product_id_seq",

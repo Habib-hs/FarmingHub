@@ -4,16 +4,21 @@ import com.project.farmingHub.entity.Breed;
 import com.project.farmingHub.entity.HealthProduct;
 import com.project.farmingHub.exception.BreedServiceException;
 import com.project.farmingHub.exception.HealthProductServiceException;
-import com.project.farmingHub.model.BreedDto;
+import com.project.farmingHub.model.Breed.BreedDto;
+import com.project.farmingHub.model.Breed.BreedGetDto;
+import com.project.farmingHub.model.HealthProductDto;
 import com.project.farmingHub.repo.BreedRepository;
 import com.project.farmingHub.repo.HealthProductRepository;
 import com.project.farmingHub.service.BreedService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BreedServiceImpl implements BreedService {
@@ -46,5 +51,21 @@ public class BreedServiceImpl implements BreedService {
                 .build();
 
         return breedRepo.save(ob);
+    }
+
+    @Override
+    public BreedGetDto getBreedById(Long id) {
+        return breedRepo.findById(id)
+                .map(breed -> BreedGetDto.builder()
+                        .breedId(breed.getBreedId())
+                        .breedName(breed.getBreedName())
+                        .healthProductDtoList(breed.getRecommendedProducts().stream()
+                                .map(healthProduct -> HealthProductDto.builder()
+                                        .id(healthProduct.getProductId())
+                                        .productName(healthProduct.getProductName())
+                                        .productType(healthProduct.getProductType())
+                                        .build()).collect(Collectors.toList()))
+                        .build())
+                .orElseThrow(()-> new BreedServiceException("Breed with " + id + " id not found"));
     }
 }
