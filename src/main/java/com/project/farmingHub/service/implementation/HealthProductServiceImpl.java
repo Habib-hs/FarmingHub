@@ -42,7 +42,7 @@ public class HealthProductServiceImpl implements HealthProductService {
         return healthProductRepository.save(product);
     }
 
-    @Cacheable(value = "HealthProductDto" , key = "#id")
+    @Cacheable(value = "healthProduct" , key = "#id")
     @Override
     public HealthProductDto getProductById(Long id) {
         return healthProductRepository.findById(id)
@@ -54,7 +54,7 @@ public class HealthProductServiceImpl implements HealthProductService {
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.BAD_REQUEST , "Product with " + id + " id not found"));
     }
 
-    @Cacheable(value = "HealthProductDto")
+    @Cacheable(value = "healthProducts")
     @Override
     public Page<HealthProductDto> getAllProducts(int pageNo, int pageSize, String searchKeyword) {
         Pageable pageable = PageRequest.of(pageNo , pageSize);
@@ -83,7 +83,7 @@ public class HealthProductServiceImpl implements HealthProductService {
     }
 
     @Transactional
-    @CachePut(value = "HealthProductDto" , key = "#id")
+    @CachePut(value = "healthProduct" , key = "#id")
     @Override
     public HealthProductDto updateProduct(HealthProductDto dto, Long id) {
         return healthProductRepository.findById(id)

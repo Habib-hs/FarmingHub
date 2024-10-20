@@ -22,7 +22,7 @@ public class Breed {
     @OneToMany(mappedBy = "breed", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Flock> flocks = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "breed_health_product",
             joinColumns = @JoinColumn(name = "breed_id"),

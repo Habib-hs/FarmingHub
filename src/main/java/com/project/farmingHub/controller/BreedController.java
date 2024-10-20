@@ -4,6 +4,7 @@ import com.project.farmingHub.model.Breed.BreedDto;
 import com.project.farmingHub.model.Breed.BreedGetDto;
 import com.project.farmingHub.service.BreedService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class BreedController {
     }
 
 
-    @GetMapping("/get/{id}")
+    @GetMapping(value = "/get/{id}" , produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BreedGetDto> getBreedById(@PathVariable Long id){
         return ResponseEntity.ok(breedService.getBreedById(id));
     }
