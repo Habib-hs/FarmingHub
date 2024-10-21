@@ -1,4 +1,4 @@
-package com.project.farmingHub.model;
+package com.project.farmingHub.model.HealthProduct;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

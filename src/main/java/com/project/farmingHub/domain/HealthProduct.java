@@ -1,7 +1,7 @@
-package com.project.farmingHub.entity;
+package com.project.farmingHub.domain;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.farmingHub.validation.ValidatorProductType;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import jakarta.persistence.*;
 
@@ -11,7 +11,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "health_product")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -41,6 +42,7 @@ public class HealthProduct implements Serializable {
     private Set<Flock> flocks = new HashSet<>();
 
     @ManyToMany(mappedBy = "recommendedProducts")
+    @JsonBackReference
     private Set<Breed> recommendedForBreeds = new HashSet<>();
 
 

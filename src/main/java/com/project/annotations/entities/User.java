@@ -1,7 +1,7 @@
 package com.project.annotations.entities;
-import com.project.farmingHub.entity.Flock;
-import com.project.farmingHub.entity.Notification;
-import com.project.farmingHub.entity.Role;
+import com.project.farmingHub.domain.Flock;
+import com.project.farmingHub.domain.Notification;
+import com.project.farmingHub.domain.Role;
 import lombok.*;
 import jakarta.persistence.*;
 import java.util.HashSet;

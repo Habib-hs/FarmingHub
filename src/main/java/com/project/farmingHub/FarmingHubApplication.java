@@ -1,6 +1,6 @@
 package com.project.farmingHub;
 
-import com.project.farmingHub.entity.Book;
+import com.project.farmingHub.domain.Book;
 import com.project.farmingHub.repo.BookRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +16,7 @@ import java.util.List;
 @SpringBootApplication
 @RestController
 @RequestMapping("/book")
-@EntityScan(basePackages = {"com.project.annotations.entities" , "com.project.farmingHub.entity"})
+@EntityScan(basePackages = {"com.project.annotations.entities" , "com.project.farmingHub.domain"})
 @EnableJpaRepositories(basePackages = {"com.project.annotations.repositories" , "com.project.farmingHub.repo"})
 public class FarmingHubApplication {
 

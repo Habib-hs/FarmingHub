@@ -1,4 +1,4 @@
-package com.project.farmingHub.entity;
+package com.project.farmingHub.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

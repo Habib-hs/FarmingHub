@@ -1,4 +1,4 @@
-package com.project.farmingHub.entity;
+package com.project.farmingHub.domain;
 
 import lombok.*;
 import jakarta.persistence.*;import java.math.BigDecimal;

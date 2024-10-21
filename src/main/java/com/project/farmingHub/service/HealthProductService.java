@@ -1,8 +1,8 @@
 package com.project.farmingHub.service;
 
-import com.project.farmingHub.entity.HealthProduct;
+import com.project.farmingHub.domain.HealthProduct;
 import com.project.farmingHub.exception.HealthProductServiceException;
-import com.project.farmingHub.model.HealthProductDto;
+import com.project.farmingHub.model.HealthProduct.HealthProductDto;
 import org.springframework.data.domain.Page;
 
 

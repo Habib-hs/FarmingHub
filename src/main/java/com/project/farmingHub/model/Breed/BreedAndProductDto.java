@@ -1,27 +1,34 @@
 package com.project.farmingHub.model.Breed;
 
-import com.project.farmingHub.model.HealthProductDto;
+import com.project.farmingHub.model.HealthProduct.HealthProductDto;
+import lombok.Data;
 
-import java.util.List;
 
-public class BreedGetDto {
+import java.util.Set;
+
+@Data
+public class BreedAndProductDto {
 
     private Long breedId;
 
     private String breedName;
 
-    private List<HealthProductDto> healthProductDtoList;
+    private Set<HealthProductDto> healthProductDtoList;
 
 
-    public BreedGetDto(final Long breedId, final String breedName, final List<HealthProductDto> healthProductDtoList) {
+    public BreedAndProductDto() {
+
+    }
+
+    public BreedAndProductDto(final Long breedId, final String breedName, final Set<HealthProductDto> healthProductDtoList) {
         this.breedId = breedId;
         this.breedName = breedName;
         this.healthProductDtoList = healthProductDtoList;
     }
 
 
-    public static BreedGetDto.BreedBuilder builder(){
-        return new BreedGetDto.BreedBuilder();
+    public static BreedAndProductDto.BreedBuilder builder(){
+        return new BreedAndProductDto.BreedBuilder();
     }
 
     public static class BreedBuilder {
@@ -30,7 +37,7 @@ public class BreedGetDto {
 
         private String breedName;
 
-        private List<HealthProductDto> healthProductDtoList;
+        private Set<HealthProductDto> healthProductDtoList;
 
         BreedBuilder(){
 
@@ -49,13 +56,13 @@ public class BreedGetDto {
         }
 
 
-        public BreedBuilder healthProductDtoList(final List<HealthProductDto> healthProductDtoList){
+        public BreedBuilder healthProductDtoList(final Set<HealthProductDto> healthProductDtoList){
             this.healthProductDtoList = healthProductDtoList;
             return this;
         }
 
-        public BreedGetDto build(){
-            return new BreedGetDto(this.breedId , this.breedName , this.healthProductDtoList);
+        public BreedAndProductDto build(){
+            return new BreedAndProductDto(this.breedId , this.breedName , this.healthProductDtoList);
         }
 
 

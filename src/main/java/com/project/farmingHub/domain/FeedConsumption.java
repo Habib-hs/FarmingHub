@@ -1,29 +1,31 @@
-package com.project.farmingHub.entity;
+package com.project.farmingHub.domain;
+
 import lombok.*;
 import jakarta.persistence.*;import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "mortality")
+@Table(name = "feed_consumption")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Mortality {
+public class FeedConsumption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long mortalityId;
+    private Long feedConsumptionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flock_id", nullable = false)
     private Flock flock;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "feed_inventory_id", nullable = false)
+    private FeedInventory feedInventory;
+
     @Column(nullable = false)
     private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cause_id", nullable = false)
-    private CauseOfDeath cause;
-
     @Column(nullable = false)
-    private Integer numberOfDeaths;
+    private BigDecimal quantity;
 }

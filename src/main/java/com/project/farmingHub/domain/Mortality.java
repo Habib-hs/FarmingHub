@@ -1,19 +1,17 @@
-package com.project.farmingHub.entity;
-
+package com.project.farmingHub.domain;
 import lombok.*;
 import jakarta.persistence.*;import java.time.LocalDate;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name = "egg_production")
+@Table(name = "mortality")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EggProduction {
+public class Mortality {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productionId;
+    private Long mortalityId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flock_id", nullable = false)
@@ -22,9 +20,10 @@ public class EggProduction {
     @Column(nullable = false)
     private LocalDate date;
 
-    @Column(nullable = false)
-    private Integer quantity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cause_id", nullable = false)
+    private CauseOfDeath cause;
 
     @Column(nullable = false)
-    private BigDecimal pricePerEgg;
+    private Integer numberOfDeaths;
 }

@@ -1,8 +1,7 @@
 package com.project.farmingHub.service.implementation;
 
-import com.project.farmingHub.entity.HealthProduct;
-import com.project.farmingHub.exception.HealthProductServiceException;
-import com.project.farmingHub.model.HealthProductDto;
+import com.project.farmingHub.domain.HealthProduct;
+import com.project.farmingHub.model.HealthProduct.HealthProductDto;
 import com.project.farmingHub.repo.HealthProductRepository;
 import com.project.farmingHub.service.HealthProductService;
 import jakarta.transaction.Transactional;

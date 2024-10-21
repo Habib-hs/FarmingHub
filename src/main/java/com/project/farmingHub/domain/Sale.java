@@ -1,4 +1,4 @@
-package com.project.farmingHub.entity;
+package com.project.farmingHub.domain;
 import com.project.farmingHub.enums.SaleType;
 import lombok.*;
 import jakarta.persistence.*;import java.time.LocalDate;
