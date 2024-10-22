@@ -16,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,6 +35,9 @@ public class BreedServiceImpl implements BreedService {
 
     @Autowired
     private HealthProductRepository healthProductRepository;
+
+    @Autowired
+    private PagedResourcesAssembler<BreedAndProductDto> pagedResourcesAssembler;
 
 
     @Transactional
@@ -137,8 +143,63 @@ public class BreedServiceImpl implements BreedService {
     }
 
     @Override
-    public Page<BreedFetchDto> getAllBreedAndProducts(int pageNo, int pageSize, String searchKeyword) {
-        return null;
+    public Page<BreedAndProductDto> getAllBreedAndProducts(int pageNo, int pageSize, String searchKeyword) {
+
+
+        Pageable pageable = PageRequest.of(pageNo , pageSize);
+
+        if(searchKeyword == null || searchKeyword.isEmpty()){
+            Page<Breed> breeds= breedRepo.findAll(pageable);
+
+            if(breeds.isEmpty()){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND , "No data found");
+            }
+
+            return breeds.map(it->
+                    new BreedAndProductDto(it.getBreedId() , it.getBreedName() , it.getRecommendedProducts().stream().map(
+                            healthProduct -> HealthProductDto.builder()
+                                    .id(healthProduct.getProductId())
+                                    .productName(healthProduct.getProductName())
+                                    .productType(healthProduct.getProductType())
+                                    .build()).collect(Collectors.toSet()))
+            );
+        }else{
+            Page<Breed> breeds= breedRepo.findAllByKeyword(searchKeyword , pageable);
+
+            if(breeds.isEmpty()){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND , "No data found");
+            }
+
+            return breeds.map(it->
+                    new BreedAndProductDto(it.getBreedId() , it.getBreedName() , it.getRecommendedProducts().stream().map(
+                            healthProduct -> HealthProductDto.builder()
+                                    .id(healthProduct.getProductId())
+                                    .productName(healthProduct.getProductName())
+                                    .productType(healthProduct.getProductType())
+                                    .build()).collect(Collectors.toSet()))
+            );
+        }
     }
+
+    @Override
+    public PagedModel<EntityModel<BreedAndProductDto>> getPaginatedBreeds(int pageNo, int pageSize) {
+
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Breed> breeds = breedRepo.findAll(pageable);
+
+        Page<BreedAndProductDto> breedAndProductDtos  = breeds.map(it->
+                new BreedAndProductDto(it.getBreedId() , it.getBreedName() ,
+                        it.getRecommendedProducts().stream().map(
+                        healthProduct -> HealthProductDto.builder()
+                                .id(healthProduct.getProductId())
+                                .productName(healthProduct.getProductName())
+                                .productType(healthProduct.getProductType())
+                                .build()).collect(Collectors.toSet()
+                )));
+
+
+        return pagedResourcesAssembler.toModel(breedAndProductDtos);
+    }
+
 
 }

@@ -11,7 +11,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   mvc:
-    contentnegotiation:
+    content-negotiation:
       favor-parameter=true:
 
       media-types:

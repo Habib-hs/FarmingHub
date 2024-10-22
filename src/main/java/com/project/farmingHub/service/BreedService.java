@@ -7,6 +7,9 @@ import com.project.farmingHub.model.Breed.BreedAndProductDto;
 import com.project.farmingHub.model.Breed.BreedFetchDto;
 import org.springframework.data.domain.Page;
 
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
+
 
 public interface BreedService {
 
@@ -18,5 +21,7 @@ public interface BreedService {
 
     Page<BreedFetchDto> getAllBreeds(int pageNo , int pageSize , String searchKeyword);
 
-    Page<BreedFetchDto> getAllBreedAndProducts(int pageNo , int pageSize , String searchKeyword);
+    Page<BreedAndProductDto> getAllBreedAndProducts(int pageNo , int pageSize , String searchKeyword);
+
+    PagedModel<EntityModel<BreedAndProductDto>> getPaginatedBreeds(int pageNo, int pageSize);
 }

@@ -47,12 +47,17 @@ public class BreedController {
     }
 
 
-    @GetMapping("/get/breed/product/list")
+    @GetMapping("/get/all")
     public ResponseEntity<?> getAllBreedAndProducts(@RequestParam(defaultValue = "0") int pageNo,
                                           @RequestParam(defaultValue = "5") int pageSize,
                                           @RequestParam(required = false)String searchKeyword) {
         return ResponseEntity.ok(breedService.getAllBreedAndProducts(pageNo , pageSize , searchKeyword));
     }
 
+    @GetMapping("/get/apr2/all")
+    public ResponseEntity<?> getAllBreedAndProductsApproach2(@RequestParam(defaultValue = "0") int pageNo,
+                                                    @RequestParam(defaultValue = "5") int pageSize) {
+        return ResponseEntity.ok(breedService.getPaginatedBreeds(pageNo , pageSize));
+    }
 
 }
