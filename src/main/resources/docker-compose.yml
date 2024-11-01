@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  springboot_app:
+    image: farming-app:latest
+    container_name: springboot_app
+    ports:
+      - "8050:9090"
+    depends_on:
+      - postgres_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/farmingHubDB
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+
+  postgres_db:
+    image: postgres:latest
+    container_name: postgres_con
+    ports:
+      - "5436:5432"
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: farmingHubDB
+    volumes:
+      - C:\postgres_container_data:/var/lib/postgresql/data
